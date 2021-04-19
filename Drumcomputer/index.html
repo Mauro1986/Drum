@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="styles/style.css">
+
+    </head>
+
+    <body>
+        <br>
+   <center><h1>Cartoon-Soundbar</h1></center>
+
+        <div class="keys">
+            <div data-key="66" class="key">
+              <kbd>B</kbd>
+              <span class="sound">Bell</span>
+            </div>
+            <div data-key="87" class="key">
+              <kbd>W</kbd>
+              <span class="sound">Wuuw</span>
+            </div>
+            <div data-key="67" class="key">
+              <kbd>C</kbd>
+              <span class="sound">Car</span>
+            </div>
+            <div data-key="70" class="key">
+              <kbd>F</kbd>
+              <span class="sound">Horn</span>
+            </div>
+            <div data-key="83" class="key">
+              <kbd>S</kbd>
+              <span class="sound">Saxophone</span>
+            </div>
+            <div data-key="72" class="key">
+              <kbd>H</kbd>
+              <span class="sound">CorkPull</span>
+            </div>
+            <div data-key="74" class="key">
+              <kbd>J</kbd>
+              <span class="sound">Doing</span>
+            </div>
+            <div data-key="71" class="key">
+              <kbd>G</kbd>
+              <span class="sound">Glug-glug</span>
+            </div>
+            <div data-key="76" class="key">
+              <kbd>L</kbd>
+              <span class="sound">Firewrok</span>
+            </div>
+          </div>
+          
+          <audio data-key="66" src="sounds/cartoon-hit.wav"></audio>
+          <audio data-key="87" src="sounds/cartoon-spin-whistle.wav"></audio>
+          <audio data-key="67" src="sounds/car-zooms-past.wav"></audio>
+          <audio data-key="70" src="sounds/model-a-car-horn.wav"></audio>
+          <audio data-key="83" src="sounds/saxophone-blurp-1.wav"></audio>
+          <audio data-key="72" src="sounds/cork-pull-and-pop.wav"></audio>
+          <audio data-key="74" src="sounds/cartoon-whizz-boing.wav"></audio>
+          <audio data-key="71" src="sounds/glug-glug-glug-glug.wav"></audio>
+          <audio data-key="76" src="sounds/cartoon-firework-and-explosion.wav"></audio>
+
+          <script>
+            function removeTransition(e) {
+              if (e.propertyName !== 'transform') return;
+              e.target.classList.remove('playing');
+            }
+          
+            function playSound(e) {
+              const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+              const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+              if (!audio) return;
+          
+              key.classList.add('playing');
+              audio.currentTime = 0;
+              audio.play();
+            }
+          
+            const keys = Array.from(document.querySelectorAll('.key'));
+            keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+            window.addEventListener('keydown', playSound);
+          </script>
+
+    </body>
+
+  </html>  
